@@ -1,0 +1,78 @@
+money-tracker-app/
+├── .firebaserc
+├── .gitignore
+├── backend
+│   ├── .env
+│   ├── .env.backup
+│   ├── config
+│   │   ├── db.js
+│   │   ├── firebase.js
+│   │   └── serviceAccountKey.json
+│   ├── controllers
+│   │   ├── authController.js
+│   │   └── transactionController.js
+│   ├── LOGIN_FIX_SUMMARY.md
+│   ├── middleware
+│   │   ├── authMiddleware.js
+│   │   └── errorHandler.js
+│   ├── models
+│   │   ├── Transaction.js
+│   │   └── User.js
+│   ├── MONGODB_ATLAS_SETUP.md
+│   ├── nodemon.json
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── routes
+│   │   ├── authRoutes.js
+│   │   └── transactionRoutes.js
+│   ├── server.js
+│   ├── setup-env.js
+│   ├── test-atlas-login.js
+│   ├── test-login.js
+│   └── utils
+│       └── sendEmail.js
+├── firebase.json
+├── frontend
+│   ├── .env
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   ├── index.html
+│   │   └── manifest.js
+│   ├── src
+│   │   ├── api
+│   │   │   └── api.js
+│   │   ├── App.js
+│   │   ├── assets
+│   │   ├── components
+│   │   │   ├── AuthForm.js
+│   │   │   ├── Modal.js
+│   │   │   ├── Navbar.js
+│   │   │   ├── SummaryCharts.js
+│   │   │   ├── TransactionForm.js
+│   │   │   └── TransactionList.js
+│   │   ├── contexts
+│   │   │   ├── AuthContext.js
+│   │   │   └── ThemeContext.js
+│   │   ├── index.css
+│   │   ├── index.js
+│   │   ├── package.json
+│   │   ├── pages
+│   │   │   ├── Dashboard.js
+│   │   │   ├── ForgotPasswordPage.js
+│   │   │   ├── LoginPage.js
+│   │   │   ├── NotFoundPage.js
+│   │   │   ├── RegisterPage.js
+│   │   │   └── ResetPasswordPage.js
+│   │   └── utils
+│   │       └── helpers.js
+│   └── tailwind.config.js
+├── functions
+│   ├── .gitignore
+│   ├── index.js
+│   ├── package-lock.json
+│   └── package.json
+├── package-lock.json
+├── package.json
+└── README.md
