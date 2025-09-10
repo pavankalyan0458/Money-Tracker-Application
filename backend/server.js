@@ -4,6 +4,7 @@ const connectDB = require('./config/db'); // Function to connect to MongoDB
 const authRoutes = require('./routes/authRoutes'); // Authentication routes
 const transactionRoutes = require('./routes/transactionRoutes'); // Transaction routes
 const walletRoutes = require('./routes/walletRoutes'); // Wallet routes
+const userRoutes = require('./routes/userRoutes'); // User profile routes
 const errorHandler = require('./middleware/errorHandler'); // Custom error handling middleware
 const cors = require('cors'); // For enabling Cross-Origin Resource Sharing
 const admin = require('./config/firebase'); // Use centralized Firebase Admin config
@@ -67,6 +68,7 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/wallets', walletRoutes);
+app.use('/api/user', userRoutes);
 
 // Custom error handling middleware (should be placed last)
 app.use(errorHandler);

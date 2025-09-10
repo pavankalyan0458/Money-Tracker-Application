@@ -1,5 +1,6 @@
 // frontend/src/components/WalletCard.jsx
 import React from 'react';
+import { useCurrency } from '../contexts/CurrencyContext';
 
 /**
  * Display a single wallet with name, type, and balance.
@@ -7,6 +8,8 @@ import React from 'react';
  * - onClick: selects the wallet for filtering
  */
 function WalletCard({ wallet, selected = false, onClick }) {
+  const { formatAmount } = useCurrency();
+  
   return (
     <button
       type="button"
@@ -23,7 +26,7 @@ function WalletCard({ wallet, selected = false, onClick }) {
           <div className="text-lg font-semibold">{wallet.name}</div>
         </div>
         <div className="text-xl font-bold">
-          ${Number(wallet.balance || 0).toFixed(2)}
+          {formatAmount(wallet.balance)}
         </div>
       </div>
     </button>

@@ -2,6 +2,7 @@
 import React from 'react';
 import { format } from 'date-fns'; // For convenient date formatting
 import { Edit, Trash2, TrendingUp, TrendingDown } from 'lucide-react'; // Icons
+import { useCurrency } from '../contexts/CurrencyContext';
 
 /**
  * Component to display a list of transactions in a table format.
@@ -11,6 +12,8 @@ import { Edit, Trash2, TrendingUp, TrendingDown } from 'lucide-react'; // Icons
  * @param {function} props.onDelete - Callback function when the delete button is clicked for a transaction.
  */
 function TransactionList({ transactions, onEdit, onDelete }) {
+  const { formatAmount } = useCurrency();
+  
   if (!transactions || transactions.length === 0) {
     return <p className="text-center text-gray-500 dark:text-gray-400 py-4">No transactions to display.</p>;
   }
@@ -49,7 +52,7 @@ function TransactionList({ transactions, onEdit, onDelete }) {
               <td className={`py-3 px-4 whitespace-nowrap text-sm font-medium ${
                 transaction.type === 'income' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
               }`}>
-                ${transaction.amount.toFixed(2)}
+                {formatAmount(transaction.amount)}
               </td>
               <td className="py-3 px-4 whitespace-nowrap text-center text-sm font-medium">
                 {/* Edit button with SVG icon */}

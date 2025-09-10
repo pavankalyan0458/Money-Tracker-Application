@@ -41,4 +41,17 @@ export const updateWallet = (id, data) => API.put(`/wallets/${id}`, data);
 export const deleteWallet = (id) => API.delete(`/wallets/${id}`);
 export const transferWallet = (payload) => API.post('/wallets/transfer', payload);
 
+// User Profile APIs
+export const uploadProfilePhoto = (profilePhoto, firebaseUid) => 
+  API.post('/user/upload-photo', { profilePhoto, firebaseUid });
+
+export const removeProfilePhoto = (firebaseUid) => 
+  API.delete('/user/remove-photo', { data: { firebaseUid } });
+
+export const getUserProfile = (firebaseUid) => 
+  API.get(`/user/profile?firebaseUid=${firebaseUid}`);
+
+export const updateUserProfile = (firebaseUid, profileData) => 
+  API.put('/user/profile', { firebaseUid, ...profileData });
+
 export default API;

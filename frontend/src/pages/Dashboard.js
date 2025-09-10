@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext'; // Use the useAuth hook for authentication
+import { useCurrency } from '../contexts/CurrencyContext'; // Use the useCurrency hook for currency formatting
 import api, { getWallets } from '../api/api'; // Axios instance for API calls
 import TransactionForm from '../components/TransactionForm'; // Form for adding/editing transactions
 import TransactionList from '../components/TransactionList'; // Component to display transaction list
@@ -17,6 +18,7 @@ import WalletCard from '../components/WalletCard';
  */
 function Dashboard() {
   const { user, loading: authLoading } = useAuth(); // Get user and auth loading state from useAuth hook
+  const { formatAmount } = useCurrency(); // Get currency formatting function
   const navigate = useNavigate(); // Hook for programmatic navigation
   const [transactions, setTransactions] = useState([]); // State to store user's transactions
   const [loading, setLoading] = useState(false); // State to manage loading status of transactions
@@ -246,33 +248,7 @@ function Dashboard() {
         Your Financial Dashboard
       </h1>
 
-      {/* Wallet Cards Filter Row */}
-      <div className="mb-8 space-y-3">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold">Wallets</h3>
-          <button
-            onClick={() => setActiveWalletId('')}
-            className={`text-sm px-3 py-1 rounded border ${activeWalletId ? 'opacity-100' : 'opacity-60'}`}
-            title="Clear wallet filter"
-          >
-            All Wallets
-          </button>
-        </div>
-        {wallets.length === 0 ? (
-          <div className="text-sm text-gray-500">No wallets yet. Create one in Wallets page.</div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {wallets.map((w) => (
-              <WalletCard
-                key={w._id}
-                wallet={w}
-                selected={activeWalletId === w._id}
-                onClick={() => setActiveWalletId(activeWalletId === w._id ? '' : w._id)}
-              />
-            ))}
-          </div>
-        )}
-      </div>
+      {/* Wallets section removed as requested */}
 
       {/* Error Display */}
       {error && (
@@ -288,7 +264,7 @@ function Dashboard() {
             Total Income (This Month)
           </h3>
           <p className="text-3xl font-bold text-green-600 dark:text-green-400">
-            ${totalIncome.toFixed(2)}
+            {formatAmount(totalIncome)}
           </p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-red-500">
@@ -296,7 +272,7 @@ function Dashboard() {
             Total Expenses (This Month)
           </h3>
           <p className="text-3xl font-bold text-red-600 dark:text-red-400">
-            ${totalExpenses.toFixed(2)}
+            {formatAmount(totalExpenses)}
           </p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
@@ -304,7 +280,7 @@ function Dashboard() {
             Net Balance (This Month)
           </h3>
           <p className={`text-3xl font-bold ${netBalance >= 0 ? 'text-blue-600 dark:text-blue-400' : 'text-red-600 dark:text-red-400'}`}>
-            ${netBalance.toFixed(2)}
+            {formatAmount(netBalance)}
           </p>
         </div>
       </div>

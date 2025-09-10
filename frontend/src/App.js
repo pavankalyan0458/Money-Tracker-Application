@@ -11,6 +11,8 @@ import Navbar from './components/Navbar'; // Navigation bar component
 import { AuthProvider, useAuth } from './contexts/AuthContext'; // Authentication context provider
 import { ThemeProvider } from './contexts/ThemeContext'; // Theme context provider
 import { Toaster } from 'react-hot-toast'; // For toast notifications
+import { CurrencyProvider } from './contexts/CurrencyContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import WalletsPage from './pages/WalletsPage.jsx';
 import Home from './pages/Home.jsx';
 import Transactions from './pages/Transactions.jsx';
@@ -56,7 +58,7 @@ function AppContent() {
   return (
     <Router>
       {/* The main container for the application, applies background color based on theme */}
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col transition-colors duration-300">
+      <div className="min-h-screen bg-gradient-to-br from-gray-100 to-white dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-gray-100 flex flex-col transition-colors duration-300">
         <Navbar /> {/* Navigation bar, visible on all pages */}
         <main className="flex-grow container mx-auto p-4">
           {/* Define application routes with proper protection */}
@@ -160,10 +162,14 @@ function App() {
   return (
     // ThemeProvider wraps AuthProvider to ensure theme is available before auth state
     <ThemeProvider>
-      {/* AuthProvider wraps the entire application to make authentication context available globally */}
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
+      <LanguageProvider>
+        <CurrencyProvider>
+          {/* AuthProvider wraps the entire application to make authentication context available globally */}
+          <AuthProvider>
+            <AppContent />
+          </AuthProvider>
+        </CurrencyProvider>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

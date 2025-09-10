@@ -1,12 +1,14 @@
 // frontend/src/pages/WalletsPage.jsx
 import React, { useEffect, useMemo, useState } from 'react';
 import { getWallets, createWallet, updateWallet, deleteWallet, transferWallet } from '../api/api';
+import { useCurrency } from '../contexts/CurrencyContext';
 import WalletCard from '../components/WalletCard';
 import WalletModal from '../components/WalletModal';
 import { toast } from 'react-hot-toast';
 import { PlusCircle, ArrowLeftRight } from 'lucide-react';
 
 function WalletsPage() {
+  const { formatAmount } = useCurrency();
   const [wallets, setWallets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -85,7 +87,7 @@ function WalletsPage() {
         </div>
       </div>
 
-      <div className="mb-4 text-gray-600 dark:text-gray-300">Total Balance: <span className="font-semibold">${totalBalance.toFixed(2)}</span></div>
+      <div className="mb-4 text-gray-600 dark:text-gray-300">Total Balance: <span className="font-semibold">{formatAmount(totalBalance)}</span></div>
 
       {error && (
         <div className="mb-4 p-3 rounded bg-red-100 text-red-800">{error}</div>
